@@ -52,6 +52,12 @@ let Tlist_WinWidth = 60
 " <F3> opens taglist
 nnoremap <silent> <F3> :TlistToggle<cr>
 
+" <F2> calls :tselect on word under cursor
+fun! TLTSelect()
+  let s:word = expand('<cword>')
+  :exe ":tselect " . s:word
+endfun
+nnoremap <F2> :call TLTSelect()<cr>
 " ----- /ctags -------------------
 
 
