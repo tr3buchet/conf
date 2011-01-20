@@ -23,8 +23,8 @@ set directory=~/.vim/tmp
 
 set title titlestring=%{$PWD}>\ %{v:progname}\ %f
 
-" F12 switches to next window
-nnoremap <F12> <C-w><C-w>
+" 00 switches to next window
+nnoremap 00 <C-w><C-w>
 
 
 " ----- ctags --------------------
@@ -50,7 +50,7 @@ nnoremap <F4> :vsp <cr>:exec("tag ".expand("<cword>"))<cr>
 let Tlist_WinWidth = 60
 
 " <F3> opens taglist
-nnoremap <F3> :TlistToggle<cr>
+nnoremap <silent> <F3> :TlistToggle<cr>
 
 " ----- /ctags -------------------
 
