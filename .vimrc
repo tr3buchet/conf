@@ -21,14 +21,39 @@ syntax enable
 set backupdir=~/.vim/tmp
 set directory=~/.vim/tmp
 
-" set titlestring
 set title titlestring=%{$PWD}>\ %{v:progname}\ %f
 
-" ctags
-" map ,bt :!ctags -R -o /home/trey/.tags/nova_trunk /home/trey/nova/trunk<CR>
-" set tags=/home/trey/.ctags/nova_trunk,/home/trey/.ctags/python_std_lib
-" map <F4> <C-]>
-" map <F3> <C-t>
+" F12 switches to next window
+nnoremap <F12> <C-w><C-w>
+
+
+" ----- ctags --------------------
+
+" ,bt repopulates ctags database
+nnoremap ,bt :!ctags -R -o /home/trey/.tags/nova_trunk /home/trey/nova/trunk<CR>
+
+" path to tags db(s)
+set tags=/home/trey/.ctags/nova_trunk,/home/trey/.ctags/python_std_lib
+
+" open ctag in new tab
+"nnoremap <F4> :tab split<cr>:exec("tag ".expand("<cword>"))<cr>
+
+" alt -> go to ctag under curser
+nnoremap <A-Right> <C-]>
+" alt <- move back through ctags
+nnoremap <A-Left> <C-t>
+
+" F4 opens ctag in vertical split
+nnoremap <F4> :vsp <cr>:exec("tag ".expand("<cword>"))<cr>
+
+" taglist window width
+let Tlist_WinWidth = 60
+
+" <F3> opens taglist
+nnoremap <F3> :TlistToggle<cr>
+
+" ----- /ctags -------------------
+
 
 " remember cursor location in file
 if has("autocmd")
@@ -45,6 +70,7 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
 " Auto completion using shift tab
+"inoremap <S-tab> <tab>
 inoremap <S-tab> <C-p>
 
 " set tabs to insert tabs on line in normal mode
@@ -72,7 +98,7 @@ if &term == 'screen'
 endif
 
 " reload all files open in vim in current screen session
-command ReloadVims execute "!screen -X at \"\\#\" stuff :e^M"
+command ReloadVims execute "!screen -X at \"\\#\" stuff :e"
 nnoremap <F5> :ReloadVims<cr>
 
 " :w!! will save current file using sudo, (if you forgot)
