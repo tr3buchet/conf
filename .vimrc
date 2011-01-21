@@ -29,11 +29,21 @@ nnoremap 00 <C-w><C-w>
 
 " ----- ctags --------------------
 
-" ,bt repopulates ctags database
-nnoremap ,bt :!ctags -R -o /home/trey/.tags/nova_trunk /home/trey/nova/trunk<CR>
+" <F2> populates current bzr ctags database with current branch
+fun GenCTags()
+  let bpath = system('bzr root')
+  if v:shell_error
+    echo bpath
+    return 0
+  endif
+  let result = system('ctags -R -f /home/trey/.ctags/bzr_current_branch ' . bpath)
+endfun
+nnoremap <silent> <F2> :call GenCTags()<cr>
+
+"nnoremap ,bt :!ctags -R -o /home/trey/.tags/nova_current_branch /home/trey/nova/trunk<CR>
 
 " path to tags db(s)
-set tags=/home/trey/.ctags/nova_trunk,/home/trey/.ctags/python_std_lib
+set tags=/home/trey/.ctags/nova_current_branch,/home/trey/.ctags/python_std_lib
 
 " open ctag in new tab
 "nnoremap <F4> :tab split<cr>:exec("tag ".expand("<cword>"))<cr>
@@ -49,15 +59,18 @@ nnoremap <F4> :vsp <cr>:exec("tag ".expand("<cword>"))<cr>
 " taglist window width
 let Tlist_WinWidth = 60
 
-" <F3> opens taglist
-nnoremap <silent> <F3> :TlistToggle<cr>
+" sorting
+let Tlist_Sort_Type = "name"
 
-" <F2> calls :tselect on word under cursor
-fun! TLTSelect()
+" t opens taglist
+nnoremap <silent> t :TlistToggle<cr>
+
+" <F3> calls :tselect on word under cursor
+fun TLTSelect()
   let s:word = expand('<cword>')
   :exe ":tselect " . s:word
 endfun
-nnoremap <F2> :call TLTSelect()<cr>
+nnoremap <F3> :call TLTSelect()<cr>
 " ----- /ctags -------------------
 
 
