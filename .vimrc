@@ -43,7 +43,7 @@ nnoremap <silent> <F2> :call GenCTags()<cr>
 "nnoremap ,bt :!ctags -R -o /home/trey/.tags/nova_current_branch /home/trey/nova/trunk<CR>
 
 " path to tags db(s)
-set tags=/home/trey/.ctags/nova_current_branch,/home/trey/.ctags/python_std_lib
+set tags=/home/trey/.ctags/bzr_current_branch,/home/trey/.ctags/python_std_lib
 
 " open ctag in new tab
 "nnoremap <F4> :tab split<cr>:exec("tag ".expand("<cword>"))<cr>
