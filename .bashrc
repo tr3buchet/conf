@@ -27,7 +27,7 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 
-export PATH=$PATH:~:~/bin:.
+export PATH=$PATH:.:~/bin
 #export CDPATH=:$HOME/nova
 
 if [ -f ~/.bash_colors ]; then
@@ -127,6 +127,7 @@ alias rgrep='rgrep --color=always'
 alias lt='tree -Ch --dirsfirst'
 alias lta='tree -aCh --dirsfirst'
 alias diff='diff -y --suppress-common-lines'
+#alias sudo='sudo env PATH=$PATH'
 #alias touch='ttouch'
 
 
