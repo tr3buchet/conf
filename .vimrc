@@ -5,8 +5,8 @@ set number          " display line number
 set autoindent
 set expandtab       " convert tabs to spaces
 "set tabstop=4      " sets how wide to display tabs
-set softtabstop=2   " number of spaces to insert when tab is pressed in insert mode, use with 'set expandtab'
-set shiftwidth=2    " number of spaces to insert with reindent operations (<< and >>) and automatic C-style indentation
+set softtabstop=4   " number of spaces to insert when tab is pressed in insert mode, use with 'set expandtab'
+set shiftwidth=4    " number of spaces to insert with reindent operations (<< and >>) and automatic C-style indentation
 
 set showmatch       " highlights all matches when searching
 set hlsearch        " sets highlighting of all search terms
