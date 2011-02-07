@@ -31,19 +31,23 @@ nnoremap 00 <C-w><C-w>
 
 " <F2> populates current bzr ctags database with current branch
 fun GenCTags()
-  let bpath = system('bzr root')
+  let path = system('bzr root')
   if v:shell_error
-    echo bpath
-    return 0
+    let path = system('git rev-parse --show-toplevel')
+    if v:shell_error
+      echo "not a git or bzr repo"
+      return 0
+    endif
   endif
-  let result = system('ctags -R -f /home/trey/.ctags/bzr_current_branch ' . bpath)
+  let result = system('ctags -R -f /home/trey/.ctags/python_std_lib /usr/local/lib/python2.6')
+  let result = system('ctags -R -f /home/trey/.ctags/current_branch ' . path)
 endfun
 nnoremap <silent> <F2> :call GenCTags()<cr>
 
 "nnoremap ,bt :!ctags -R -o /home/trey/.tags/nova_current_branch /home/trey/nova/trunk<CR>
 
 " path to tags db(s)
-set tags=/home/trey/.ctags/bzr_current_branch,/home/trey/.ctags/python_std_lib
+set tags=/home/trey/.ctags/current_branch,/home/trey/.ctags/python_std_lib
 
 " open ctag in new tab
 "nnoremap <F4> :tab split<cr>:exec("tag ".expand("<cword>"))<cr>
