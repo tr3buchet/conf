@@ -5,8 +5,8 @@ set number          " display line number
 set autoindent
 set expandtab       " convert tabs to spaces
 "set tabstop=4      " sets how wide to display tabs
-set softtabstop=4   " number of spaces to insert when tab is pressed in insert mode, use with 'set expandtab'
-set shiftwidth=4    " number of spaces to insert with reindent operations (<< and >>) and automatic C-style indentation
+set softtabstop=2   " number of spaces to insert when tab is pressed in insert mode, use with 'set expandtab'
+set shiftwidth=2    " number of spaces to insert with reindent operations (<< and >>) and automatic C-style indentation
 
 set showmatch       " highlights all matches when searching
 set hlsearch        " sets highlighting of all search terms
@@ -31,6 +31,8 @@ nnoremap 00 <C-w><C-w>
 
 " <F2> populates current bzr ctags database with current branch
 fun GenCTags()
+  let result = system('ctags -R -f /home/trey/.ctags/python_usr_lib /usr/local/lib/python2.6')
+  let result = system('ctags -R -f /home/trey/.ctags/python_std_lib /usr/lib/python2.6')
   let path = system('bzr root')
   if v:shell_error
     let path = system('git rev-parse --show-toplevel')
@@ -39,7 +41,6 @@ fun GenCTags()
       return 0
     endif
   endif
-  let result = system('ctags -R -f /home/trey/.ctags/python_std_lib /usr/local/lib/python2.6')
   let result = system('ctags -R -f /home/trey/.ctags/current_branch ' . path)
 endfun
 nnoremap <silent> <F2> :call GenCTags()<cr>
@@ -47,7 +48,7 @@ nnoremap <silent> <F2> :call GenCTags()<cr>
 "nnoremap ,bt :!ctags -R -o /home/trey/.tags/nova_current_branch /home/trey/nova/trunk<CR>
 
 " path to tags db(s)
-set tags=/home/trey/.ctags/current_branch,/home/trey/.ctags/python_std_lib
+set tags=/home/trey/.ctags/current_branch,/home/trey/.ctags/python_std_lib,/home/trey/.ctags/python_usr_lib
 
 " open ctag in new tab
 "nnoremap <F4> :tab split<cr>:exec("tag ".expand("<cword>"))<cr>
