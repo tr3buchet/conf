@@ -131,6 +131,7 @@ alias lt='tree -Ch --dirsfirst'
 alias lta='tree -aCh --dirsfirst'
 alias diff='diff -y --suppress-common-lines'
 alias ps='ps -eo pid,user,cmd'
+#alias vpnc='sudo vpnc --local-port 0'
 #alias sudo='sudo env PATH=$PATH'
 #alias touch='ttouch'
 
