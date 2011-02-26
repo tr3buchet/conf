@@ -124,7 +124,8 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more aliases
-alias lls='ls -AhlF'
+alias lls='ls -hlF'
+alias lla='ls -AhlF'
 alias la='ls -AF'
 alias rgrep='rgrep --color=always'
 alias lt='tree -Ch --dirsfirst'
