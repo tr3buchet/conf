@@ -127,7 +127,7 @@ fi
 alias lls='ls -hlF'
 alias lla='ls -AhlF'
 alias la='ls -AF'
-alias rgrep='rgrep --color=always'
+alias rgrep='rgrep --color=always -n'
 alias lt='tree -Ch --dirsfirst'
 alias lta='tree -aCh --dirsfirst'
 alias diff='diff -y --suppress-common-lines'
