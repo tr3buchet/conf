@@ -100,6 +100,8 @@ inoremap <S-tab> <C-p>
 " set tabs to insert tabs on line in normal mode
 nnoremap <S-tab> <<
 nnoremap <tab> >>
+vnoremap <S-tab> <<
+vnoremap <tab> >>
 
 
 " omnicomplete
