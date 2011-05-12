@@ -23,7 +23,7 @@ if [ $1 == "update" ]; then
       update "$ARG"
     fi
   done
-elif [ $1 == "install"]; then
+elif [ $1 == "install" ]; then
   # install! this will overwrite, any existing files
   # .bash_colors
     cp .bash_colors ~/.bash_colors
