@@ -17,24 +17,32 @@ function update {
 
 # check for update otherwise install
 if [ $1 == "update" ]; then
+  echo updating....
   for ARG in "$@"; do
-    echo $ARG
+    echo "  $ARG"
     if [ "$ARG" != "update" ]; then
       update "$ARG"
     fi
   done
+  echo done
 elif [ $1 == "install" ]; then
   # install! this will overwrite, any existing files
   # .bash_colors
+    echo "installing .bash_colors conf"
     cp .bash_colors ~/.bash_colors
   # .bashrc
+    echo "installing .bashrc conf"
     cp .bashrc ~/.bashrc
   # .screenrc
+    echo "installing .screenrc conf"
     cp .screenrc ~/.screenrc
   # .vimrc
+    echo "installing .vimrc conf"
     cp .vimrc ~/.vimrc
   # .vim
+    echo "installing .vim directory"
     cp -r .vim ~/.vim
   # .ctags
+    echo "creating .ctags directory"
     mkdir ~/.ctags
 fi
