@@ -24,7 +24,7 @@ set directory=~/.vim/tmp
 set title titlestring=%{$PWD}>\ %{v:progname}\ %f
 
 " 00 switches to next window
-nnoremap 00 <C-w><C-w>
+nnoremap 0 <C-w><C-w>
 
 
 " ----- ctags --------------------
@@ -53,10 +53,12 @@ set tags=/home/trey/.ctags/current_branch,/home/trey/.ctags/python_std_lib,/home
 " open ctag in new tab
 "nnoremap <F4> :tab split<cr>:exec("tag ".expand("<cword>"))<cr>
 
-" alt -> go to ctag under curser
+" alt -> go to ctag under curser (2 for putty)
 nnoremap <A-Right> <C-]>
-" alt <- move back through ctags
+nnoremap 2 <C-]>
+" alt <- move back through ctags (1 for putty)
 nnoremap <A-Left> <C-t>
+nnoremap 1 <C-t>
 
 " F4 opens ctag in vertical split
 nnoremap <F4> :vsp <cr>:exec("tag ".expand("<cword>"))<cr>
@@ -113,6 +115,14 @@ highlight Pmenu ctermbg=black ctermfg=green
 highlight PmenuSel ctermbg=black ctermfg=red
 highlight PmenuSbar ctermbg=black ctermfg=red
 highlight PmenuThumb ctermfg=red
+
+" set vimdiff colors
+highlight DiffAdd ctermfg=black ctermbg=green
+highlight DiffDelete ctermfg=black ctermbg=red
+highlight DiffChange ctermfg=black ctermbg=yellow
+highlight DiffText ctermfg=black ctermbg=magenta
+highlight FoldColumn ctermfg=4 ctermbg=black
+highlight Folded ctermfg=4 ctermbg=black
 
 " only add up to the longest match into buffer
 " show menu even if there is only one item
