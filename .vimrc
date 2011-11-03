@@ -33,7 +33,7 @@ nnoremap 0 <C-w><C-w>
 "  <C-o> create a paste of currect selection in visual mode
 let g:pastie_type = 'plaintext'
 fun Pastie()
-  let result = system("curl http://pastie.org/pastes/create -H 'Expect:' -F 'paste[parser]=" . g:pastie_type . "' -F 'paste[body]=" . getreg("\"") . "' -F 'paste[authorization]=burger' -s -L -o /dev/null -w '%{url_effective}'")
+  let result = system("curl http://pastie.org/pastes/create -H 'Expect:' -F 'paste[parser]=" . g:pastie_type . "' -F 'paste[body]=<-' -F 'paste[authorization]=burger' -s -L -o /dev/null -w '%{url_effective}'", getreg("\""))
   echo result
 endfun
 vnoremap <C-o> y:call Pastie()<cr>
