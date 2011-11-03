@@ -14,6 +14,8 @@ set hlsearch        " sets highlighting of all search terms
 set nocompatible
 "set mouse=a
 
+set visualbell      " no more beeps!
+
 filetype plugin indent on
 syntax enable
 
