@@ -16,3 +16,6 @@ let python_highlight_all = 1
 " Show long lines.
 highlight LongLine guibg=red ctermbg=red
 match LongLine /\%>79v.\+/
+
+" type used for pastie.org
+let g:pastie_type = 'python'

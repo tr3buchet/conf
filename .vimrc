@@ -26,20 +26,29 @@ set title titlestring=%{$PWD}>\ %{v:progname}\ %f
 " 00 switches to next window
 nnoremap 0 <C-w><C-w>
 
+" ------- pastie.org --------------------------------
+"  filetype plugin can override g:pastie_type otherwise assume plaintext
+"  <C-o> create a paste of currect selection in visual mode
+let g:pastie_type = 'plaintext'
+fun Pastie()
+  let result = system("curl http://pastie.org/pastes/create -H 'Expect:' -F 'paste[parser]=" . g:pastie_type . "' -F 'paste[body]=" . getreg("\"") . "' -F 'paste[authorization]=burger' -s -L -o /dev/null -w '%{url_effective}'")
+  echo result
+endfun
+vnoremap <C-o> y:call Pastie()<cr>
+
+" ------- end pastie.org ---------------------------
+
 
 " ----- ctags --------------------
 
-" <F2> populates current bzr ctags database with current branch
+" <F2> populates current git ctags database with current branch
 fun GenCTags()
   let result = system('ctags -R -f /home/trey/.ctags/python_usr_lib /usr/local/lib/python2.6')
   let result = system('ctags -R -f /home/trey/.ctags/python_std_lib /usr/lib/python2.6')
-  let path = system('bzr root')
+  let path = system('git rev-parse --show-toplevel')
   if v:shell_error
-    let path = system('git rev-parse --show-toplevel')
-    if v:shell_error
-      echo "not a git or bzr repo"
+      echo "not a git repo"
       return 0
-    endif
   endif
   let result = system('ctags -R -f /home/trey/.ctags/current_branch ' . path)
 endfun
