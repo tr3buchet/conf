@@ -16,6 +16,7 @@ screen -t "bash" 4
 #caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= ${CURRENT_SLICEHOST_APP}@%H - %LD %d %LM - %c"
 #caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w"
 #caption always '%{= kg}%-w%{= r}%n %t%{-}%+w %-=%{g}(%{d}%H/%l%{g})'
-caption always '%{= g}%-w%{= r}%n %t%{-}%+w %-=%{g}(%{d}%H/%l%{g})'
+#caption always '%{= g}%-w%{= r}%n %t%{-}%+w %-=%{g}(%{d}%H/%l%{g})'
+caption always '%{= g}%-w%{= r}%n %t%{-}%+w %-=%{g}(%{d}%H/%l/%c:%s%{g})'
 
 select 1
