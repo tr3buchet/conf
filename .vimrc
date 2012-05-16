@@ -23,7 +23,8 @@ syntax enable
 set backupdir=~/.vim/tmp
 set directory=~/.vim/tmp
 
-set title titlestring=%{$PWD}>\ %{v:progname}\ %f
+set title titlestring=%{v:progname}\ %F
+"set title titlestring=[%{$PWD}]%%\ %{v:progname}\ %F
 
 " 00 switches to next window
 nnoremap 0 <C-w><C-w>
@@ -107,8 +108,9 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
 " Auto completion using shift tab
-"inoremap <S-tab> <tab>
-inoremap <S-tab> <C-p>
+inoremap <S-tab> <C-n>
+" ctrl-tab doesn't always work..
+inoremap <C-tab> <C-p>
 
 " set tabs to insert tabs on line in normal mode
 nnoremap <S-tab> <<
