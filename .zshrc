@@ -41,10 +41,7 @@ export PATH=$PATH:.:~/bin
 
 # -------- title settings ----------------------
 case $TERM in
-    xterm*)
-        precmd () {print -Pn "\e]0;[%n|%m %~]%#\a"}
-        ;;
-    screen*)
+    xterm|screen)
         precmd () {print -Pn "\e]0;[%n|%m %~]%#\a"}
         ;;
 esac
