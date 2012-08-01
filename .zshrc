@@ -25,7 +25,9 @@ setopt EXTENDED_HISTORY
 
 setopt beep extendedglob nomatch notify
 bindkey -e
-# End of lines configured by zsh-newuser-install
+
+# source completion
+. /home/trey/.zshrc_compinit
 # The following lines were added by compinstall
 #zstyle :compinstall filename '/home/trey/.zsh/.zshrc'
 
@@ -109,19 +111,32 @@ function git_rprompt {
     # red is dirty working directory
     if on_git_branch; then
         if git_branch_clean; then
-            echo "{%{$fg_bold[green]%}●%{$reset_color%}}"
+            echo "%{$fg_bold[green]%}●%{$reset_color%}"
         else
-            echo "{%{$fg[red]%}●%{$reset_color%}}"
+            echo "%{$fg[red]%}●%{$reset_color%}"
         fi
     fi
 }
+function vpnc_rprompt {
+    # creates a prompt for vpnc
+    # a green V means it's installed
+    lines=`sudo route -n | wc -l`
+    if [ $lines -gt 4 ]; then
+        echo "%{$fg_bold[green]%}VPN%{$reset_color%}"
+    else
+        echo ""
+    fi
+}
+
 
 setopt promptsubst
 if git_installed; then
     PROMPT='%{$fg_bold[green]%}[%n|%m %{$reset_color%}%{$fg[red]%}%~$(git_prompt)%{$fg_bold[green]%}]%#%{$reset_color%} '
-    RPROMPT='$(git_rprompt)'
+    RPROMPT='$(git_rprompt) $(vpnc_rprompt)'
 else
-    PS1='[%{$fg_bold[green]%}%n|%m %{$reset_color%}%{$fg[red]%}%~%{$fg_bold[green]%}]%#%{$reset_color%} '
+    PROMPT='[%{$fg_bold[green]%}%n|%m %{$reset_color%}%{$fg[red]%}%~%{$fg_bold[green]%}]%#%{$reset_color%} '
+    RPROMPT='$(vpnc_rprompt)'
+
 fi
 # -------- end prompt settings -----------------
 
@@ -146,6 +161,10 @@ alias diff='diff -y --suppress-common-lines'
 alias ps='ps -eo pid,user,cmd'
 alias ack='ack-grep --color --color-match=red --group --sort-files'
 alias less='less -R'
+alias vpnc='sudo vpnc --local-port 0'
+alias vpncd='sudo vpnc-disconnect'
+alias il='inova-login'
+alias sn='supernova'
 alias history='history -Di'
 
 alias apti='sudo aptitude install'
@@ -154,3 +173,6 @@ alias aptuu='sudo aptitude update && sudo aptitude safe-upgrade'
 alias apts='sudo aptitude search'
 alias aptr='sudo aptitude remove'
 alias aptc='sudo aptitude clean'
+
+alias ppjson='python -mjson.tool'
+alias ppxml='python -c "import sys, xml.dom.minidom; print xml.dom.minidom.parseString(sys.stdin.read()).toprettyxml()"'
