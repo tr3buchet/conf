@@ -110,8 +110,8 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
 " Auto completion using shift tab
+"inoremap <S-tab> <tab>
 inoremap <S-tab> <C-n>
-" ctrl-tab doesn't always work..
 inoremap <C-tab> <C-p>
 
 " set tabs to insert tabs on line in normal mode
@@ -154,3 +154,9 @@ nnoremap <F5> :ReloadVims<cr>
 
 " :w!! will save current file using sudo, (if you forgot)
 cmap w!! %!sudo tee > /dev/null %
+
+" use pathogen and shit
+call pathogen#infect()
+
+" config flake8
+let g:syntastic_python_checker_args='--builtins=_'

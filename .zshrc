@@ -26,6 +26,20 @@ setopt EXTENDED_HISTORY
 setopt beep extendedglob nomatch notify
 bindkey -e
 
+# prevents clobbering a file with >
+# use >! to do it anyway
+setopt noclobber
+
+# let files beginning with a . be matched with explicitly specifying .
+# ex: "ls *git*" matches .git where it wouldn't before
+setopt globdots
+
+# turns on correction prompt for commands
+setopt correct
+
+# turns on correction prompt for arguments to commands
+setopt correctall
+
 # source completion
 . /home/trey/.zshrc_compinit
 # The following lines were added by compinstall
@@ -159,13 +173,14 @@ alias pt='tree -Ch --dirsfirst --charset=ASCII'
 alias pta='tree -aCh --dirsfirst --charset=ASCII'
 alias diff='diff -y --suppress-common-lines'
 alias ps='ps -eo pid,user,cmd'
-alias ack='ack-grep --color --color-match=red --group --sort-files'
+alias ack='ack-grep --color --color-match=red --group --sort-files --ignore-dir=tests'
 alias less='less -R'
 alias vpnc='sudo vpnc --local-port 0'
 alias vpncd='sudo vpnc-disconnect'
 alias il='inova-login'
 alias sn='supernova'
 alias history='history -Di'
+alias sx='screen -x'
 
 alias apti='sudo aptitude install'
 alias aptu='sudo aptitude update'
