@@ -52,6 +52,15 @@ setopt correctall
 
 # -------- path settings ------------------
 export PATH=$PATH:.:~/bin
+
+# ensure no duplicates in path
+typeset -U PATH
+
+# set CDPATH to allow for cd (ex: some dir in git) from anywhere
+export CDPATH=.:~/git
+
+# ensure no duplicates in cdpath
+typeset -U CDPATH
 # -------- end path settings --------------
 
 

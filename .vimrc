@@ -10,6 +10,7 @@ set shiftwidth=2    " number of spaces to insert with reindent operations (<< an
 
 set showmatch       " highlights all matches when searching
 set hlsearch        " sets highlighting of all search terms
+set incsearch       " vim starts searching immediately and updates as you type
 
 set nofoldenable    " disables folds/folding
 
