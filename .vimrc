@@ -26,6 +26,11 @@ syntax enable
 set backupdir=~/.vim/tmp
 set directory=~/.vim/tmp
 
+" copy/paste between sessions
+vmap <silent> <F5> y:call writefile(split(@0, "\n"), $HOME . "/.vim/copy_tmp")<cr>
+nmap <silent> <F5> yy:call writefile(split(@0, "\n"), $HOME . "/.vim/copy_tmp")<cr>
+nmap <F6> :r ~/.vim/copy_tmp<CR>
+
 set title titlestring=%{v:progname}\ %F
 "set title titlestring=[%{$PWD}]%%\ %{v:progname}\ %F
 
@@ -148,10 +153,6 @@ set completeopt=longest,menuone
 if &term == 'screen'
   exe "set term=xterm"
 endif
-
-" reload all files open in vim in current screen session
-command ReloadVims execute "!screen -X at \"\\#\" stuff :e"
-nnoremap <F5> :ReloadVims<cr>
 
 " :w!! will save current file using sudo, (if you forgot)
 cmap w!! %!sudo tee > /dev/null %
