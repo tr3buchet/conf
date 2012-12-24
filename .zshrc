@@ -57,7 +57,7 @@ export PATH=$PATH:.:~/bin
 typeset -U PATH
 
 # set CDPATH to allow for cd (ex: some dir in git) from anywhere
-export CDPATH=.:~/git
+export CDPATH=.:~:~/git
 
 # ensure no duplicates in cdpath
 typeset -U CDPATH
@@ -194,8 +194,8 @@ alias diff='diff -y --suppress-common-lines'
 alias ps='ps -eo pid,user,cmd'
 alias ack='ack-grep --color --color-match=red --group --sort-files --ignore-dir=tests'
 alias less='less -R'
-#alias vpnc='sudo vpnc --local-port 0'
-#alias vpncd='sudo vpnc-disconnect'
+alias vpnc='sudo vpnc --local-port 0'
+alias vpncd='sudo vpnc-disconnect'
 alias il='inova-login'
 alias sn='supernova'
 alias history='history -Di'
@@ -210,3 +210,6 @@ alias aptc='sudo aptitude clean'
 
 alias ppjson='python -mjson.tool'
 alias ppxml='python -c "import sys, xml.dom.minidom; print xml.dom.minidom.parseString(sys.stdin.read()).toprettyxml()"'
+alias vv='virtualenv venv'
+alias va='. venv/bin/activate'
+alias vd='deactivate'
