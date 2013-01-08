@@ -61,8 +61,7 @@ nnoremap <F11> yy:call Gister("-p")<cr>
 " secret gist on private github from selection or single line
 vnoremap <F12> y:call Gister("-p", "-s")<cr>
 nnoremap <F12> yy:call Gister("-p", "-s")<cr>
-
-" ------- end pastie.org ---------------------------
+" ------- end gist making! ---------------------------
 
 
 " ----- ctags --------------------
