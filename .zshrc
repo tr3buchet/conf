@@ -210,6 +210,6 @@ alias aptc='sudo aptitude clean'
 
 alias ppjson='python -mjson.tool'
 alias ppxml='python -c "import sys, xml.dom.minidom; print xml.dom.minidom.parseString(sys.stdin.read()).toprettyxml()"'
-alias vv='virtualenv venv'
-alias va='. venv/bin/activate'
+alias vv='virtualenv .venv'
+alias va='. .venv/bin/activate'
 alias vd='deactivate'

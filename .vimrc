@@ -37,15 +37,30 @@ set title titlestring=%{v:progname}\ %F
 " 00 switches to next window
 nnoremap 0 <C-w><C-w>
 
-" ------- pastie.org --------------------------------
-"  filetype plugin can override g:pastie_type otherwise assume plaintext
-"  <C-o> create a paste of currect selection in visual mode
-let g:pastie_type = 'plaintext'
-fun Pastie()
-  let result = system("curl http://pastie.org/pastes/create -H 'Expect:' -F 'paste[parser]=" . g:pastie_type . "' -F 'paste[body]=<-' -F 'paste[authorization]=burger' -s -L -o /dev/null -w '%{url_effective}'", getreg("\""))
+" ------- gist making! --------------------------------
+fun Gister(...)
+  let gister_call = "gister -v"
+  for flag in a:000
+    let gister_call = gister_call . " " . flag
+  endfor
+  let result = system(gister_call, expand("%:t") . "\n" . getreg("\""))
   echo result
 endfun
-vnoremap <C-o> y:call Pastie()<cr>
+" public gist on github from selection or single line
+vnoremap <F9> y:call Gister()<cr>
+nnoremap <F9> yy:call Gister()<cr>
+
+" secret gist on github from selection or single line
+vnoremap <F10> y:call Gister("-s")<cr>
+nnoremap <F10> yy:call Gister("-s")<cr>
+
+" public gist on private github from selection or single line
+vnoremap <F11> y:call Gister("-p")<cr>
+nnoremap <F11> yy:call Gister("-p")<cr>
+
+" secret gist on private github from selection or single line
+vnoremap <F12> y:call Gister("-p", "-s")<cr>
+nnoremap <F12> yy:call Gister("-p", "-s")<cr>
 
 " ------- end pastie.org ---------------------------
 
