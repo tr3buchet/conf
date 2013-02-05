@@ -192,7 +192,7 @@ alias pt='tree -Ch --dirsfirst --charset=ASCII'
 alias pta='tree -aCh --dirsfirst --charset=ASCII'
 alias diff='diff -y --suppress-common-lines'
 alias ps='ps -eo pid,user,cmd'
-alias ack='ack-grep --color --color-match=red --group --sort-files --ignore-dir=tests`
+alias ack='ack-grep --color --color-match=red --group --sort-files --ignore-dir=tests'
 alias less='less -R'
 alias vpnc='sudo vpnc --local-port 0'
 alias vpncd='sudo vpnc-disconnect'
