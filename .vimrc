@@ -12,7 +12,8 @@ set showmatch       " highlights all matches when searching
 set hlsearch        " sets highlighting of all search terms
 set incsearch       " vim starts searching immediately and updates as you type
 
-set nofoldenable    " disables folds/folding
+set nofoldenable       " disables folds/folding
+set foldminlines=99999 " disables the folding even in vimdiff
 
 set nocompatible
 "set mouse=a
