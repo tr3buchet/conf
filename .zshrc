@@ -49,6 +49,10 @@ setopt correctall
 #compinit
 # End of lines added by compinstall
 
+# -------- virtualenvwrapper stuffs ------------------
+source /usr/local/bin/virtualenvwrapper.sh
+export WORKON_HOME=~/python/.venv
+
 
 # -------- path settings ------------------
 export PATH=$PATH:.:~/bin
@@ -62,6 +66,15 @@ export CDPATH=.:~:~/git
 # ensure no duplicates in cdpath
 typeset -U CDPATH
 # -------- end path settings --------------
+
+
+# -------- screen TERM settings ----------------------
+case $TERM in
+    screen)
+        export TERM=screen-256color
+        ;;
+esac
+# -------- end screen TERM settings ------------------
 
 
 # -------- title settings ----------------------
@@ -192,7 +205,7 @@ alias pt='tree -Ch --dirsfirst --charset=ASCII'
 alias pta='tree -aCh --dirsfirst --charset=ASCII'
 alias diff='diff -y --suppress-common-lines'
 alias ps='ps -eo pid,user,cmd'
-alias ack='ack-grep --color --color-match=red --group --sort-files --ignore-dir=tests --ignore-dir=.venv'
+alias ack='ack-grep --color --color-match=red --group --sort-files --ignore-dir=tests --ignore-dir=.venv --ignore-dir=.tox'
 alias less='less -R'
 alias vpnc='sudo vpnc --local-port 0'
 alias vpncd='sudo vpnc-disconnect'
@@ -213,3 +226,5 @@ alias ppxml='python -c "import sys, xml.dom.minidom; print xml.dom.minidom.parse
 alias vv='virtualenv .venv'
 alias va='. .venv/bin/activate'
 alias vd='deactivate'
+
+alias ilq='inova-login -e ordinova quantum'

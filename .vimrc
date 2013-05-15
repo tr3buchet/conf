@@ -18,10 +18,20 @@ set foldminlines=99999 " disables the folding even in vimdiff
 set nocompatible
 "set mouse=a
 
+" enable powerline (pip install git+git://github.com/Lokaltog/powerline)
+" also make sure to install vim-nox for python support
+set rtp+=/usr/local/lib/python2.6/dist-packages/powerline/bindings/vim
+set laststatus=2
+"let g:Powerline_symbols = 'fancy'
+"set t_Co=256 " explicitly tell vim that the terminal supports 256
+
 set visualbell      " no more beeps!
 
 filetype plugin indent on
 syntax enable
+
+" colorscheme with statement color set to Yellow vs Brown
+colorscheme peachpuff2
 
 " centralized backup directory for swp files
 set backupdir=~/.vim/tmp
@@ -76,7 +86,7 @@ fun GenCTags()
       echo "not a git repo"
       return 0
   endif
-  let result = system('ctags -R -f /home/trey/.ctags/current_branch ' . path)
+  let result = system("ctags -R -f /home/trey/.ctags/current_branch --exclude='.tox' " . path)
 endfun
 nnoremap <silent> <F2> :call GenCTags()<cr>
 
@@ -141,7 +151,6 @@ nnoremap <tab> >>
 vnoremap <S-tab> <<
 vnoremap <tab> >>
 
-
 " omnicomplete
 " set popup menu colors
 " items are green on black
@@ -172,8 +181,14 @@ endif
 " :w!! will save current file using sudo, (if you forgot)
 cmap w!! %!sudo tee > /dev/null %
 
-" use pathogen and shit
-call pathogen#infect()
+" -------------- pathogen settings ----------------
+" pathogen is .vim/autoload/pathogen.vim
+" it loads plugins into vim for you
+" this injects all of the stuff in .vim/bundle
+execute pathogen#infect()
 
-" config flake8
-let g:syntastic_python_checker_args='--builtins=_'
+" config flake8 setup in the syntastic plugin
+" (which is loaded by pathogen)
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_flake8_args='--builtin=_'
+let g:syntastic_check_on_open=1
