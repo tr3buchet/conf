@@ -189,6 +189,6 @@ execute pathogen#infect()
 
 " config flake8 setup in the syntastic plugin
 " (which is loaded by pathogen)
-let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_checkers = ['flake8', 'mccabe']
 let g:syntastic_python_flake8_args='--builtin=_'
 let g:syntastic_check_on_open=1
