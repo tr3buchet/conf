@@ -18,11 +18,8 @@ set foldminlines=99999 " disables the folding even in vimdiff
 set nocompatible
 "set mouse=a
 
-" enable powerline (pip install git+git://github.com/Lokaltog/powerline)
-" also make sure to install vim-nox for python support
-set rtp+=/usr/local/lib/python2.6/dist-packages/powerline/bindings/vim
-set laststatus=2
-"let g:Powerline_symbols = 'fancy'
+set laststatus=2      " always display status line
+set statusline=%<%F\ %h%m%r%=%-14.(%l,%c%V%)\ %P    " same as default status but absolute path instead of relative
 "set t_Co=256 " explicitly tell vim that the terminal supports 256
 
 set visualbell      " no more beeps!
@@ -31,7 +28,7 @@ filetype plugin indent on
 syntax enable
 
 " colorscheme with statement color set to Yellow vs Brown
-colorscheme peachpuff2
+"colorscheme peachpuff2
 
 " centralized backup directory for swp files
 set backupdir=~/.vim/tmp
