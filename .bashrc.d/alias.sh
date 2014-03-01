@@ -24,6 +24,7 @@ alias aptc='sudo aptitude clean'
 alias yumi='sudo yum install'
 alias yumu='sudo yum update'
 alias yums='sudo yum search'
+alias yuml='sudo yum list'
 
 alias ppjson='python -mjson.tool'
 alias ppxml='python -c "import sys, xml.dom.minidom; print xml.dom.minidom.parseString(sys.stdin.read()).toprettyxml()"'
