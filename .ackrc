@@ -1,0 +1,16 @@
+# sort files
+--sort-files
+
+# always use color
+--color
+
+# match color is red instead of yellow background
+--color-match=red
+
+# always group matches to file
+--group
+
+# directories to ignore
+--ignore-dir=tests
+--ignore-dir=.venv
+--ignore-dir=.tox

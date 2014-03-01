@@ -1,7 +1,0 @@
-conf files
-
-to install (overwriting files):
-setup.sh install
-
-to update (overwriting selected files):
-setup.sh update .bashrc .screenrc

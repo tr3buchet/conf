@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# unbans an ip banned by denyhosts
+
+systemctl stop denyhosts
+cd /var/lib/denyhosts
+sed -i "/$1/d" *
+cd /etc
+sed -i "/$1/d" hosts.deny
+systemctl start denyhosts
