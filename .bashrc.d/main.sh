@@ -33,9 +33,7 @@ HISTFILESIZE=100000
 
 
 # ------------------- virtualenv settings ------------------------------ #
-source /usr/local/bin/virtualenvwrapper.sh
-export WORKON_HOME=~/.venv
-export VIRTUALENVWRAPPER_HOOK_DIR=~/.virtualenvwrapper
+source ~/.local/bin/virtualenvwrapper.sh
 # ------------------- end virtualenv settings -------------------------- #
 
 

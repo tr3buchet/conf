@@ -10,7 +10,7 @@ alias pta='tree -aCh --dirsfirst --charset=ASCII'
 alias diff='diff -y --suppress-common-lines'
 alias ps='ps -eo pid,user,cmd'
 alias less='less -R'
-alias vpnc='sudo vpnc --local-port 0'
+alias vpnc='sudo vpnc'
 alias vpncd='sudo vpnc-disconnect'
 alias ta='tmux attach'
 
