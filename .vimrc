@@ -42,6 +42,7 @@ Bundle 'gmarik/vundle'
 " Keep bundle commands between here and filetype plugin indent on.
 " scripts on GitHub repos
 Bundle 'tr3buchet/vimgitgrep'
+Bundle 'scrooloose/syntastic'
 " ...
 
 filetype plugin indent on     " required
