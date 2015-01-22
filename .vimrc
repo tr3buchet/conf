@@ -24,6 +24,8 @@ set statusline=%<%F\ %h%m%r%=%-24.(%{SyntasticStatuslineFlag()}%)%-14.(%l,%c%V%)
 
 set visualbell      " no more beeps!
 
+set showcmd
+
 
 " ------- vundle --------------------------------------
 filetype off                  " required
@@ -100,6 +102,7 @@ nmap <silent> <A-Up> :lprevious<cr>
 nmap <silent> <A-Down> :lnext<cr>
 nmap <silent> <A-Left> :call GoBackSearch()<cr>
 nmap <silent> <A-Right> :call GitGr3p(1)<cr>
+let g:gitgreppathexcludes = '^doc/\|\/doc/\|^locale/\|/locale/\|.sample$'
 " ------- end vimgitgrep -----------------------------
 
 
@@ -113,9 +116,35 @@ endif
 nmap <space> zz
 
 " show trailing whitespace
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
+"autocmd ColorScheme * highlight RedBG ctermbg=red guibg=red
+"highlight RedBG ctermbg=red guibg=red
+"let w:m1=matchadd("RedBG", '\s\+$')
+
+" show trailing whitespace, but not when i am typing (cause that's annoying right?)
+" see http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+highlight RedBG ctermbg=red guibg=red
+augroup TrailingWhitespaceMatch
+  " Remove ALL autocommands for the TrailingWhitespaceMatch group.
+  autocmd!
+  autocmd BufWinEnter * let w:redbg1 =
+        \ matchadd('RedBG', '\s\+$')
+  autocmd InsertEnter * call s:ToggleWhitespaceMatch('i')
+  autocmd InsertLeave * call s:ToggleWhitespaceMatch('n')
+augroup END
+function! s:ToggleWhitespaceMatch(mode)
+  " first pattern is match trailing whitespace except when typing at end of line
+  " we want this in insert mode
+  " second pattern is match any trailing whitespace
+  " want this in normal mode
+  let pattern = (a:mode == 'i') ? '\s\+\%#\@<!$' : '\s\+$'
+  if exists('w:redbg1')
+    call matchdelete(w:redbg1)
+    call matchadd('RedBG', pattern, 10, w:redbg1)
+  else
+    " Something went wrong, try to be graceful.
+    let w:redbg1 = matchadd('RedBG', pattern)
+  endif
+endfunction
 
 " set tabs to insert tabs on line in normal mode
 nnoremap <S-tab> <<
@@ -140,11 +169,13 @@ highlight Folded ctermfg=4 ctermbg=black
 cmap w!! %!sudo tee > /dev/null %
 
 " config flake8 setup in the syntastic plugin
+" leader e populates location list with errors
+nnoremap <silent> <leader>e :SyntasticSetLoclist<cr>
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args='--builtin=_'
 let g:syntastic_check_on_open = 1                  " run syntastic check on file open
 let g:syntastic_aggregate_errors = 1               " run all checkers and aggregate results
-let g:syntastic_always_populate_loc_list = 1       " put errors into the location list
+let g:syntastic_always_populate_loc_list = 0       " put errors into the location list
 let g:syntastic_auto_loc_list = 0                  " don't open or close the loc list
 let g:syntastic_stl_format = '[err: %e][warn: %w]' " yep
 let g:syntastic_enable_highlighting = 0            " highlight the errors is off

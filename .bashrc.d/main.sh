@@ -8,6 +8,7 @@
 # update the values of LINES and COLUMNS.
 # if not included in /etc/bashrc
 #shopt -s checkwinsize
+export EDITOR=vim
 # ------------------- end misc settings -------------------------------- #
 
 
@@ -33,8 +34,17 @@ HISTFILESIZE=100000
 
 
 # ------------------- virtualenv settings ------------------------------ #
-source ~/.local/bin/virtualenvwrapper.sh
+if [ -f ~/.local/bin/virtualenvwrapper.sh ]; then
+    source ~/.local/bin/virtualenvwrapper.sh
+fi
 # ------------------- end virtualenv settings -------------------------- #
+
+
+# ------------------- heroku tools if installed ------------------------ #
+if [ -d "$HOME/.heroku-client/bin" ] ; then
+    PATH=$PATH:$HOME/.heroku-client/bin
+fi
+# ------------------- end heroku tools if installed -------------------- #
 
 
 

@@ -11,6 +11,16 @@
 " More syntax highlighting.
 let python_highlight_all = 1
 
-" Show long lines.
-highlight LongLine guibg=red ctermbg=red
-match LongLine /\%>79v.\+/
+" Show long lines and highlight trailing whitespace
+" for some reason just the long line by itself breaks the trailing whitespace
+" set in the main .vimrc file, so have to match both here
+"highlight LongLine guibg=red ctermbg=red
+"match LongLine /\(\%>79v.\+\)\|\(\s\+$\)/
+"match LongLine /\%>79v.\+/
+
+" add longlines to the RedBG highlight defined in ~/.vimrc
+let w:redbg2=matchadd("RedBG", '\%>79v.\+')
+
+" remove NOTE from the todo hilighing
+syn clear pythonTodo
+syn keyword pythonTodo XXX TODO FIXME contained

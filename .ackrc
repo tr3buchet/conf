@@ -14,3 +14,4 @@
 --ignore-dir=tests
 --ignore-dir=.venv
 --ignore-dir=.tox
+--ignore-dir=locale

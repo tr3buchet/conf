@@ -1,10 +1,7 @@
 #!/bin/bash
 
-vpnc=`which vpnc 1>/dev/null 2>/dev/null`
-
-if [ $? -eq 0 ]; then
-    lines=`ps ax | grep vpnc | wc -l`
-    if [ $lines -gt 1 ]; then
-        echo 'VPN'
-    fi
+if [ -e '/var/run/vpnc/pid' ]; then
+    echo 'VPN'
+    exit 0
 fi
+exit 1
