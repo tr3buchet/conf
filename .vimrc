@@ -19,37 +19,16 @@ set nocompatible
 "set mouse=a
 
 set laststatus=2      " always display status line
-set statusline=%<%F\ %h%m%r%=%-24.(%{SyntasticStatuslineFlag()}%)%-14.(%l,%c%V%)\ %P    " same as default status but absolute path instead of relative
+if filereadable(glob("~/.vim/bundle/syntastic/plugin/syntastic"))
+    set statusline=%<%F\ %h%m%r%=%-24.(%{SyntasticStatuslineFlag()}%)%-14.(%l,%c%V%)\ %P    " same as default status but absolute path instead of relative
+else
+    set statusline=%<%F\ %h%m%r%=%-14.(%l,%c%V%)\ %P    " same as default status but absolute path instead of relative
+endif
+
 "set t_Co=256 " explicitly tell vim that the terminal supports 256
 
 set visualbell      " no more beeps!
-
 set showcmd
-
-
-" ------- vundle --------------------------------------
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-" alternatively, pass a path where Vundle should install bundles
-"let path = '~/some/path/here'
-"call vundle#rc(path)
-
-" let Vundle manage Vundle, required
-Bundle 'gmarik/vundle'
-
-" The following are examples of different formats supported.
-" Keep bundle commands between here and filetype plugin indent on.
-" scripts on GitHub repos
-Bundle 'tr3buchet/vimgitgrep'
-Bundle 'scrooloose/syntastic'
-" ...
-
-filetype plugin indent on     " required
-" ------- end vundle ----------------------------------
-
 
 " centralized backup directory for swp files
 set backupdir=~/.vim/tmp
@@ -65,6 +44,74 @@ set title titlestring=%{v:progname}\ %F
 
 " 0 switches to next window
 nnoremap 0 <C-w><C-w>
+
+" remember cursor location in file
+if has("autocmd")
+  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g`\"zz" | endif
+endif
+
+" space centers current line
+nmap <space> zz
+
+" set tabs to insert tabs on line in normal mode
+nnoremap <S-tab> <<
+nnoremap <tab> >>
+vnoremap <S-tab> <<
+vnoremap <tab> >>
+
+
+" ------- vundle --------------------------------------------------------------------------------------------------
+if filereadable(glob("~/.vim/bundle/vundle/autoload/vundle.vim"))
+    filetype off                  " required
+
+    " set the runtime path to include Vundle and initialize
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#rc()
+    " alternatively, pass a path where Vundle should install bundles
+    "let path = '~/some/path/here'
+    "call vundle#rc(path)
+
+    " let Vundle manage Vundle, required
+    Bundle 'gmarik/vundle'
+
+    " The following are examples of different formats supported.
+    " Keep bundle commands between here and filetype plugin indent on.
+    " scripts on GitHub repos
+    Bundle 'tr3buchet/vimgitgrep'
+    Bundle 'scrooloose/syntastic'
+    " ...
+
+    filetype plugin indent on     " required
+    " ------- end vundle --------------------------------------
+
+    " ------- vimgitgrep keys ---------------------------------
+    nmap <silent> <F2> :call Gr3p()<cr>
+    nmap <silent> <F3> :call GitGr3p(0)<cr>
+    nmap <silent> <F4> :call ToggleLList()<cr>
+    nmap <silent> <A-Up> :lprevious<cr>
+    nmap <silent> <A-Down> :lnext<cr>
+    nmap <silent> <A-Left> :call GoBackSearch()<cr>
+    nmap <silent> <A-Right> :call GitGr3p(1)<cr>
+    let g:gitgreppathexcludes = '^doc/\|\/doc/\|^locale/\|/locale/\|.sample$'
+    " ------- end vimgitgrep keys -----------------------------
+
+    " ------- syntastic settings ------------------------------
+    " config flake8 setup in the syntastic plugin
+    " leader e populates location list with errors
+    nnoremap <silent> <leader>e :SyntasticSetLoclist<cr>
+    let g:syntastic_python_checkers = ['flake8']
+    let g:syntastic_python_flake8_args='--builtin=_'
+    let g:syntastic_check_on_open = 1                  " run syntastic check on file open
+    let g:syntastic_aggregate_errors = 1               " run all checkers and aggregate results
+    let g:syntastic_always_populate_loc_list = 0       " put errors into the location list
+    let g:syntastic_auto_loc_list = 0                  " don't open or close the loc list
+    let g:syntastic_stl_format = '[err: %e][warn: %w]' " yep
+    let g:syntastic_enable_highlighting = 0            " highlight the errors is off
+    let g:syntastic_enable_signs = 0                   " disable the white bar on the left showing errors
+    " ------- end syntastic settings --------------------------
+endif
+" ------- end vundle ----------------------------------------------------------------------------------------------
 
 
 " ------- gist making! --------------------------------
@@ -94,27 +141,7 @@ nnoremap <F12> yy:call Gister("-p", "-s")<cr>
 " ------- end gist making! ---------------------------
 
 
-" ------- vimgitgrep ---------------------------------
-nmap <silent> <F2> :call Gr3p()<cr>
-nmap <silent> <F3> :call GitGr3p(0)<cr>
-nmap <silent> <F4> :call ToggleLList()<cr>
-nmap <silent> <A-Up> :lprevious<cr>
-nmap <silent> <A-Down> :lnext<cr>
-nmap <silent> <A-Left> :call GoBackSearch()<cr>
-nmap <silent> <A-Right> :call GitGr3p(1)<cr>
-let g:gitgreppathexcludes = '^doc/\|\/doc/\|^locale/\|/locale/\|.sample$'
-" ------- end vimgitgrep -----------------------------
-
-
-" remember cursor location in file
-if has("autocmd")
-  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal! g`\"zz" | endif
-endif
-
-" space centers current line
-nmap <space> zz
-
+" ------- white space time -------------------------------------------------------------
 " show trailing whitespace
 "autocmd ColorScheme * highlight RedBG ctermbg=red guibg=red
 "highlight RedBG ctermbg=red guibg=red
@@ -145,12 +172,7 @@ function! s:ToggleWhitespaceMatch(mode)
     let w:redbg1 = matchadd('RedBG', pattern)
   endif
 endfunction
-
-" set tabs to insert tabs on line in normal mode
-nnoremap <S-tab> <<
-nnoremap <tab> >>
-vnoremap <S-tab> <<
-vnoremap <tab> >>
+" ------- end white space time ---------------------------------------------------------
 
 " set vimdiff colors
 highlight DiffAdd ctermfg=black ctermbg=green
@@ -167,16 +189,3 @@ highlight Folded ctermfg=4 ctermbg=black
 
 " :w!! will save current file using sudo, (if you forgot)
 cmap w!! %!sudo tee > /dev/null %
-
-" config flake8 setup in the syntastic plugin
-" leader e populates location list with errors
-nnoremap <silent> <leader>e :SyntasticSetLoclist<cr>
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_flake8_args='--builtin=_'
-let g:syntastic_check_on_open = 1                  " run syntastic check on file open
-let g:syntastic_aggregate_errors = 1               " run all checkers and aggregate results
-let g:syntastic_always_populate_loc_list = 0       " put errors into the location list
-let g:syntastic_auto_loc_list = 0                  " don't open or close the loc list
-let g:syntastic_stl_format = '[err: %e][warn: %w]' " yep
-let g:syntastic_enable_highlighting = 0            " highlight the errors is off
-let g:syntastic_enable_signs = 0                   " disable the white bar on the left showing errors
