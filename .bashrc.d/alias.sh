@@ -10,8 +10,6 @@ alias pta='tree -aCh --dirsfirst --charset=ASCII'
 alias diff='diff -y --suppress-common-lines'
 alias ps='ps -e f'
 alias less='less -R'
-alias vpnc='sudo sed -E "s/^Xauth password [0-9]+/Xauth password $(stoken)/" -i /etc/vpnc/default.conf && sudo vpnc'
-alias vpncd='sudo vpnc-disconnect'
 alias ta='tmux attach'
 
 alias apti='sudo aptitude install'
@@ -28,6 +26,3 @@ alias yuml='sudo yum list'
 
 alias ppjson='python -mjson.tool'
 alias ppxml='python -c "import sys, xml.dom.minidom; print xml.dom.minidom.parseString(sys.stdin.read()).toprettyxml()"'
-
-alias il='inova-login'
-alias sn='supernova'

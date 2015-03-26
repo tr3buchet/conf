@@ -19,7 +19,7 @@ set nocompatible
 "set mouse=a
 
 set laststatus=2      " always display status line
-if filereadable(glob("~/.vim/bundle/syntastic/plugin/syntastic"))
+if filereadable(glob("~/.vim/bundle/syntastic/plugin/syntastic.vim"))
     set statusline=%<%F\ %h%m%r%=%-24.(%{SyntasticStatuslineFlag()}%)%-14.(%l,%c%V%)\ %P    " same as default status but absolute path instead of relative
 else
     set statusline=%<%F\ %h%m%r%=%-14.(%l,%c%V%)\ %P    " same as default status but absolute path instead of relative
