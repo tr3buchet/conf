@@ -24,11 +24,11 @@ HISTFILESIZE=100000
 
 # append to history after each command
 # if not included in /etc/bashrc
-#history -a
+# history -a
 
 # append to the history file, don't overwrite it
 # if not included in /etc/bashrc
-#shopt -s histappend
+shopt -s histappend
 # ------------------- end history settings ----------------------------- #
 
 
@@ -115,6 +115,7 @@ if [ "$force_color_prompt" = yes ]; then
 fi
 
 get_prompt() {
+    history -a
     PS1="\[\033]0;[\u|\h \w]\007\]$(virtual_env_prompt)\[$BGreen\][\u|\h \[$Red\]\w$(git_prompt)\[$BGreen\]]%\[$Color_Off\] "
     # NOTE add term title with something like this "\[\033]0;[\u|\h \w]\007\]"
 }
