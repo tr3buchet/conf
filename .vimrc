@@ -123,21 +123,13 @@ fun Gister(...)
   let result = system(gister_call, expand("%:t") . "\n" . getreg("\""))
   echo result
 endfun
-" public gist on github from selection or single line
+" secret gist on public github from selection or single line
 vnoremap <F9> y:call Gister()<cr>
 nnoremap <F9> yy:call Gister()<cr>
 
-" secret gist on github from selection or single line
-vnoremap <F10> y:call Gister("-s")<cr>
-nnoremap <F10> yy:call Gister("-s")<cr>
-
-" public gist on private github from selection or single line
-vnoremap <F11> y:call Gister("-p")<cr>
-nnoremap <F11> yy:call Gister("-p")<cr>
-
 " secret gist on private github from selection or single line
-vnoremap <F12> y:call Gister("-p", "-s")<cr>
-nnoremap <F12> yy:call Gister("-p", "-s")<cr>
+vnoremap <F10> y:call Gister("-p")<cr>
+nnoremap <F10> yy:call Gister("-p")<cr>
 " ------- end gist making! ---------------------------
 
 
