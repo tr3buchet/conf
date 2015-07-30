@@ -1,0 +1,6 @@
+[Unit]
+Description=set environment variable for mosh packets received
+
+[Service]
+Type=simple
+ExecStart=/home/trey/bin/mosh_packets.py

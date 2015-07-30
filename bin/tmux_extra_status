@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -e '/var/run/vpnc/pid' ]; then
+if [ -e '/var/run/vpnc.pid' ]; then
     echo 'VPN'
     exit 0
 fi
