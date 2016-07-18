@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "creating/overwriting README.rst from README.md"
+pandoc -s README.md -o README.rst

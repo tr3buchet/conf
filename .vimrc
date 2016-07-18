@@ -18,6 +18,10 @@ set foldminlines=99999 " disables the folding even in vimdiff
 set nocompatible
 "set mouse=a
 
+set pastetoggle=<leader>p
+map <leader>x :x<return>
+imap <leader>x <esc>:x<return>
+
 set laststatus=2      " always display status line
 if filereadable(glob("~/.vim/bundle/syntastic/plugin/syntastic.vim"))
     set statusline=%<%F\ %h%m%r%=%-24.(%{SyntasticStatuslineFlag()}%)%-14.(%l,%c%V%)\ %P    " same as default status but absolute path instead of relative
@@ -85,16 +89,16 @@ if filereadable(glob("~/.vim/bundle/vundle/autoload/vundle.vim"))
     filetype plugin indent on     " required
     " ------- end vundle --------------------------------------
 
-    " ------- vimgitgrep keys ---------------------------------
+    " ------- vimgitgrep --------------------------------------
     nmap <silent> <F2> :call Gr3p()<cr>
     nmap <silent> <F3> :call GitGr3p(0)<cr>
     nmap <silent> <F4> :call ToggleLList()<cr>
-    nmap <silent> <A-Up> :lprevious<cr>
-    nmap <silent> <A-Down> :lnext<cr>
+    nmap <silent> <A-Up> :call Previousresult()<cr>
+    nmap <silent> <A-Down> :call Nextresult()<cr>
     nmap <silent> <A-Left> :call GoBackSearch()<cr>
     nmap <silent> <A-Right> :call GitGr3p(1)<cr>
     let g:gitgreppathexcludes = '^doc/\|\/doc/\|^locale/\|/locale/\|.sample$'
-    " ------- end vimgitgrep keys -----------------------------
+    " ------- end vimgitgrep ----------------------------------
 
     " ------- syntastic settings ------------------------------
     " config flake8 setup in the syntastic plugin
@@ -112,6 +116,27 @@ if filereadable(glob("~/.vim/bundle/vundle/autoload/vundle.vim"))
     " ------- end syntastic settings --------------------------
 endif
 " ------- end vundle ----------------------------------------------------------------------------------------------
+
+" ------- swapfile dealing with -----------------------------------------------------------------------------------
+" g:newvim starts as 1 when .vimrc is sourced.
+" g:newvim is set to 0 when vim finishes loading (VimEnter fires)
+" when vim starts, if opening a file where there is a swap file, g:newvim = 1 and it will prompt.
+" once is running, g:newvim = 0, and it will no longer prompt, instead it
+" opens read-only for ease of bouncing around with vimgitgrep.
+let g:newvim = 1
+augroup swaps
+    autocmd VimEnter * let g:newvim = 0
+    autocmd SwapExists * call Swapper(expand('<afile>:p'), v:swapname)
+augroup END
+
+fun Swapper(filename, swapname)
+    if g:newvim == 1
+        let v:swapchoice = ''
+    else
+        let v:swapchoice = 'o'
+    endif
+endfun
+" ------- end swapfile dealing with -------------------------------------------------------------------------------
 
 
 " ------- gist making! --------------------------------
