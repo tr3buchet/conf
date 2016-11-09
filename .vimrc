@@ -18,9 +18,12 @@ set foldminlines=99999 " disables the folding even in vimdiff
 set nocompatible
 "set mouse=a
 
+" some leader+key maps (leader defaults to '\')
 set pastetoggle=<leader>p
 map <leader>x :x<return>
 imap <leader>x <esc>:x<return>
+nmap <leader>s :%s/\<<c-r><c-w>\>//gc<left><left><left>
+vmap <leader>s :s/\<\>//gc<left><left><left><left><left><left>
 
 set laststatus=2      " always display status line
 if filereadable(glob("~/.vim/bundle/syntastic/plugin/syntastic.vim"))
