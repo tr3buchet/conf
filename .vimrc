@@ -22,6 +22,8 @@ set nocompatible
 set pastetoggle=<leader>p
 map <leader>x :x<return>
 imap <leader>x <esc>:x<return>
+map <leader>q :q!<return>
+imap <leader>q <esc>:q!<return>
 nmap <leader>s :%s/\<<c-r><c-w>\>//gc<left><left><left>
 vmap <leader>s :s/\<\>//gc<left><left><left><left><left><left>
 
