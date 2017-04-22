@@ -1,0 +1,16 @@
+#!/bin/bash
+
+cmd=$1
+shift
+
+case "$cmd" in
+  log)
+    extra="--graph"
+    ;;
+  clean)
+    extra="-dxi"
+    ;;
+esac
+
+/usr/bin/git $cmd $@ $extra
+exit $?

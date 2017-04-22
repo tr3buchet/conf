@@ -49,7 +49,7 @@ fi
 
 
 # ------------------- path settings ------------------------------------ #
-export PATH=$PATH:.:~/bin
+export PATH=.:~/bin:$PATH
 #if [ -n "$PS1" ]; then
 #    # $PS1 is not null so this is interactive shell
 #    # do not export because we don't want CDPATH set in subprocesses
