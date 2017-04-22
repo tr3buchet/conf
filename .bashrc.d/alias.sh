@@ -26,3 +26,37 @@ alias cdrb='cd ~/git/rsdn/bison/bison'
 alias cdrc='cd ~/git/rsdn/rsdn_common/rsdn_common'
 alias cdrt='cd ~/git/rsdn/tatonka/tatonka'
 alias cdryu='cd ~/git/ryu/ryu'
+
+
+function do_git {
+  cmd=$1
+  shift
+  extra=""
+  case "$cmd" in
+    log)
+      extra="--graph"
+      ;;
+    clean)
+      extra="-dxi"
+      ;;
+  esac
+
+  # both $@ and $extra are defined
+  if [ ! -z "$@" ] && [ ! -z "$extra" ]; then
+    "/usr/bin/git" "$cmd" "$@" "$extra"
+
+  # $@ is defined, but $extra is not
+  elif [[ ! -z "$@" ]]; then
+    "/usr/bin/git" "$cmd" "$@"
+
+  # $extra is defined but $@ is not
+  elif [[ ! -z "$extra" ]]; then
+    "/usr/bin/git" "$cmd" "$extra"
+
+  # both $@ and $extra are empty
+  else
+    "/usr/bin/git" "$cmd"
+  fi
+}
+
+alias git='do_git'
