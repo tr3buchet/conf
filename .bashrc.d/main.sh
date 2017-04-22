@@ -84,7 +84,8 @@ git_prompt() {
             echo "\[$Yellow\]($(parse_git_branch))"
         else
             # dirty branch
-            echo "\[$Yellow\](\[$UYellow\]$(parse_git_branch)\[$Yellow\])"
+            # echo "\[$Yellow\](\[$UYellow\]$(parse_git_branch)\[$Yellow\])"
+            echo "\[$Yellow\]($(parse_git_branch)\[$Red\]++\[$Yellow\])"
         fi
     else
         # not a branch or no git installed

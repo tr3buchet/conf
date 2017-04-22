@@ -20,10 +20,13 @@ set nocompatible
 
 " some leader+key maps (leader defaults to '\')
 set pastetoggle=<leader>p
+imap <leader><leader> <esc>
 map <leader>x :x<return>
 imap <leader>x <esc>:x<return>
-map <leader>q :q!<return>
-imap <leader>q <esc>:q!<return>
+map <leader>w :w<return>
+imap <leader>w <esc>:w<return>
+map <leader>q :qa<return>
+imap <leader>q <esc>:qa<return>
 nmap <leader>s :%s/\<<c-r><c-w>\>//gc<left><left><left>
 vmap <leader>s :s/\<\>//gc<left><left><left><left><left><left>
 

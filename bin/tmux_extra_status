@@ -5,4 +5,5 @@ systemctl show openvpn@* | grep -q "ActiveState=active"
 if [ $? == 0 ]; then
    echo 'VPN'
    exit 0
+fi
 exit 1
