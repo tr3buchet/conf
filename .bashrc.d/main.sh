@@ -49,13 +49,13 @@ fi
 
 
 # ------------------- path settings ------------------------------------ #
-export PATH=.:~/bin:$PATH
+# this is now set in ~/.bash_profile
+# export PATH=.:~/bin:$PATH
 #if [ -n "$PS1" ]; then
 #    # $PS1 is not null so this is interactive shell
 #    # do not export because we don't want CDPATH set in subprocesses
 #    CDPATH=.:~:~/git
 #fi
-
 # ------------------- end path settings -------------------------------- #
 
 
