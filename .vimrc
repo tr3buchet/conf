@@ -27,8 +27,14 @@ map <leader>w :w<return>
 imap <leader>w <esc>:w<return>
 map <leader>q :qa<return>
 imap <leader>q <esc>:qa<return>
+nmap <leader>n O# NOTE(trey): 
 nmap <leader>s :%s/\<<c-r><c-w>\>//gc<left><left><left>
 vmap <leader>s :s/\<\>//gc<left><left><left><left><left><left>
+
+" clear highlighting on escape in normal mode
+" second line needed because vim is screwy with the escape key
+nnoremap <esc> :noh<return><esc>
+nnoremap <esc>^[ <esc>^[
 
 set laststatus=2      " always display status line
 if filereadable(glob("~/.vim/bundle/syntastic/plugin/syntastic.vim"))
@@ -69,8 +75,8 @@ nmap <space> zz
 " set tabs to insert tabs on line in normal mode
 nnoremap <S-tab> <<
 nnoremap <tab> >>
-vnoremap <S-tab> <<
-vnoremap <tab> >>
+vnoremap <S-tab> <
+vnoremap <tab> >
 
 
 " ------- vundle --------------------------------------------------------------------------------------------------

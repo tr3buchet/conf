@@ -15,3 +15,13 @@
 --ignore-dir=.venv
 --ignore-dir=.tox
 --ignore-dir=locale
+--ignore-dir=integration_tests
+--ignore-dir=match:.*\.egg-info
+--ignore-dir=.hypothesis
+
+# files to ignore
+--ignore-file=is:.coverage
+--ignore-file=is:coverage.xml
+--ignore-file=is:test_results.xml
+--ignore-file=is:kv_test_results.xml
+--ignore-file=match:.*\.js

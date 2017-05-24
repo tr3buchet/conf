@@ -12,6 +12,7 @@ alias diff='diff -y --suppress-common-lines'
 alias ps='ps -e f'
 alias less='less -R'
 alias ta='tmux attach'
+alias tack='ack --noignore-dir=tests --noignore-dir=integration_tests'
 
 alias dnfi='sudo dnf install'
 alias dnfu='sudo dnf update'
@@ -20,9 +21,3 @@ alias dnfl='sudo dnf list'
 
 alias ppjson='python -mjson.tool'
 alias ppxml='python -c "import sys, xml.dom.minidom; print xml.dom.minidom.parseString(sys.stdin.read()).toprettyxml()"'
-
-alias cdru='cd ~/git/rsdn/unicorn/unicorn'
-alias cdrb='cd ~/git/rsdn/bison/bison'
-alias cdrc='cd ~/git/rsdn/rsdn_common/rsdn_common'
-alias cdrt='cd ~/git/rsdn/tatonka/tatonka'
-alias cdryu='cd ~/git/ryu/ryu'

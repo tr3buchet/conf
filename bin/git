@@ -12,5 +12,5 @@ case "$cmd" in
     ;;
 esac
 
-/usr/bin/git $cmd $@ $extra
+/usr/bin/git $cmd "$@" $extra
 exit $?
