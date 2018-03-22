@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+sudo systemctl start openvpn@whatever
+
+# uncomment if two factor is required for vpn
+#read -p "press enter after accepting 2FA request"
+#sleep 5
+
+# uncomment to enable ip-forwarding over tun0
+# sudo firewall-cmd --permanent --zone=external --add-interface=tun0

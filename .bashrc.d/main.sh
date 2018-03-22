@@ -22,6 +22,9 @@ HISTCONTROL=ignoredups:ignorespace
 HISTSIZE=100000
 HISTFILESIZE=100000
 
+# add time info to history
+HISTTIMEFORMAT="%y/%m/%d %T "
+
 # append to history after each command
 # if not included in /etc/bashrc
 # history -a

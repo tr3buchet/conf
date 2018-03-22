@@ -18,6 +18,8 @@
 --ignore-dir=integration_tests
 --ignore-dir=match:.*\.egg-info
 --ignore-dir=.hypothesis
+--ignore-dir=build
+--ignore-dir=.cache
 
 # files to ignore
 --ignore-file=is:.coverage

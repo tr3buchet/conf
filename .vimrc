@@ -4,8 +4,8 @@ set number          " display line number
 " tab settings
 set autoindent
 set expandtab       " convert tabs to spaces
-"set tabstop=4       " sets how wide to display tabs
 set softtabstop=4   " number of spaces to insert when tab is pressed in insert mode, use with 'set expandtab'
+"set tabstop=4       " sets how wide to display tabs
 set shiftwidth=4    " number of spaces to insert with reindent operations (<< and >>) and automatic C-style indentation
 
 set showmatch       " highlights all matches when searching
@@ -31,10 +31,8 @@ nmap <leader>n O# NOTE(trey):
 nmap <leader>s :%s/\<<c-r><c-w>\>//gc<left><left><left>
 vmap <leader>s :s/\<\>//gc<left><left><left><left><left><left>
 
-" clear highlighting on escape in normal mode
-" second line needed because vim is screwy with the escape key
-nnoremap <esc> :noh<return><esc>
-nnoremap <esc>^[ <esc>^[
+" ctrl-/ clear search highlighting in normal mode
+nmap  :noh<cr>:<cr>
 
 set laststatus=2      " always display status line
 if filereadable(glob("~/.vim/bundle/syntastic/plugin/syntastic.vim"))
@@ -220,3 +218,6 @@ highlight Folded ctermfg=4 ctermbg=black
 
 " :w!! will save current file using sudo, (if you forgot)
 cmap w!! %!sudo tee > /dev/null %
+
+" because golang is stupid
+au BufRead,BufNewFile *.go set noet ts=4 sw=4

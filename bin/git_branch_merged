@@ -1,0 +1,32 @@
+#!/usr/bin/python
+import subprocess
+import sys
+
+
+def git(*args):
+    return subprocess.check_output(['/usr/bin/git'] + list(args)).strip()
+
+
+def strike(text):
+    result = ''
+    if text:
+        result = u'\u0336'.join(text) + u'\u0336'
+    return result.encode('utf-8')
+
+
+try:
+    branches = git('branch').split('\n')
+    merged_branches = [branch.lstrip(' *') for branch in
+                       git('branch', '--merged', 'origin/master').split('\n')
+                       if 'detached at' not in branch]
+except subprocess.CalledProcessError:
+    sys.exit(1)
+
+for branch in branches:
+    active = '*' if branch[0] == '*' else ''
+    branch = branch.lstrip(' *')
+
+    if branch in merged_branches:
+        branch = strike(branch)
+
+    print '{:2}{}'.format(active, branch)

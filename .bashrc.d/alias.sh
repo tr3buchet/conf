@@ -13,6 +13,7 @@ alias ps='ps -e f'
 alias less='less -R'
 alias ta='tmux attach'
 alias tack='ack --noignore-dir=tests --noignore-dir=integration_tests'
+alias time='/usr/bin/time -v'
 
 alias dnfi='sudo dnf install'
 alias dnfu='sudo dnf update'
