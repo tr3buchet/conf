@@ -12,8 +12,21 @@ set showmatch       " highlights all matches when searching
 set hlsearch        " sets highlighting of all search terms
 set incsearch       " vim starts searching immediately and updates as you type
 
-set nofoldenable       " disables folds/folding
-set foldminlines=99999 " disables the folding even in vimdiff
+"set nofoldenable       " disables folds/folding
+"set foldminlines=99999 " disables the folding even in vimdiff
+"set foldlevel=1
+"autocmd FileType python setlocal foldlevel=1
+"
+" syntax is the foldmethod for python, i defined folds in
+" ~/.vim/after/syntax/python.vim but i have no idea why ONLY
+" those docstrings are folded. without those defined (without
+" that file) like everything is folded somehow...
+" https://chrisdown.name/2015/02/26/folding-python-docstrings-in-vim.html
+autocmd FileType python setlocal foldenable foldmethod=syntax
+set foldtext=getline(v:foldstart) " set the folded docstring to the first line
+" don't fill the fold line of text with dashes
+set fillchars=fold:\ 
+
 
 set nocompatible
 "set mouse=a
@@ -78,27 +91,38 @@ vnoremap <tab> >
 
 
 " ------- vundle --------------------------------------------------------------------------------------------------
-if filereadable(glob("~/.vim/bundle/vundle/autoload/vundle.vim"))
+if filereadable(glob("~/.vim/bundle/Vundle.vim/autoload/vundle.vim"))
     filetype off                  " required
 
     " set the runtime path to include Vundle and initialize
-    set rtp+=~/.vim/bundle/vundle/
-    call vundle#rc()
-    " alternatively, pass a path where Vundle should install bundles
-    "let path = '~/some/path/here'
-    "call vundle#rc(path)
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+    " alternatively, pass a path where Vundle should install plugins
+    "call vundle#begin('~/some/path/here')
 
     " let Vundle manage Vundle, required
-    Bundle 'gmarik/vundle'
+    Plugin 'VundleVim/Vundle.vim'
 
-    " The following are examples of different formats supported.
-    " Keep bundle commands between here and filetype plugin indent on.
-    " scripts on GitHub repos
-    Bundle 'tr3buchet/vimgitgrep'
-    Bundle 'scrooloose/syntastic'
-    " ...
+    " plugins
+    Plugin 'tr3buchet/vimgitgrep'
+    Plugin 'vim-syntastic/syntastic'
+    "Plugin 'yhat/vim-docstring'
+    "Plugin 'tmhedberg/SimpylFold'
+    "Plugin 'scrooloose/syntastic'
 
-    filetype plugin indent on     " required
+    " All of your Plugins must be added before the following line
+    call vundle#end()            " required
+    filetype plugin indent on    " required
+    " To ignore plugin indent changes, instead use:
+    "filetype plugin on
+    " Brief help
+    " :PluginList       - lists configured plugins
+    " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+    " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+    " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+    "
+    " see :h vundle for more details or wiki for FAQ
+    " Put your non-Plugin stuff after this line
     " ------- end vundle --------------------------------------
 
     " ------- vimgitgrep --------------------------------------
@@ -115,10 +139,13 @@ if filereadable(glob("~/.vim/bundle/vundle/autoload/vundle.vim"))
     " ------- syntastic settings ------------------------------
     " config flake8 setup in the syntastic plugin
     " leader e populates location list with errors
-    nnoremap <silent> <leader>e :SyntasticSetLoclist<cr>
+    nnoremap <silent> <leader>e :SyntasticCheck<cr>:SyntasticSetLoclist<cr>
+    let g:syntastic_mode_map = {'mode':'passive'}
     let g:syntastic_python_checkers = ['flake8']
     let g:syntastic_python_flake8_args='--builtin=_'
-    let g:syntastic_check_on_open = 1                  " run syntastic check on file open
+    let g:syntastic_check_on_open = 0                  " run syntastic check on file open
+    let g:syntastic_check_on_wq = 0                    " disable checking on write quit
+    let g:syntastic_check_on_write = 0                 " disable checking on write
     let g:syntastic_aggregate_errors = 1               " run all checkers and aggregate results
     let g:syntastic_always_populate_loc_list = 0       " put errors into the location list
     let g:syntastic_auto_loc_list = 0                  " don't open or close the loc list
@@ -126,6 +153,13 @@ if filereadable(glob("~/.vim/bundle/vundle/autoload/vundle.vim"))
     let g:syntastic_enable_highlighting = 0            " highlight the errors is off
     let g:syntastic_enable_signs = 0                   " disable the white bar on the left showing errors
     " ------- end syntastic settings --------------------------
+    " ------- simpylfold settings -----------------------------
+    let g:SimpylFold_docstring_preview = 1
+    let g:SimpylFold_fold_docstring = 1
+    let b:SimpylFold_fold_docstring = 1
+    let g:SimpylFold_fold_import = 0
+    let b:SimpylFold_fold_import = 0
+    " ------- end simpylfold settings -------------------------
 endif
 " ------- end vundle ----------------------------------------------------------------------------------------------
 
