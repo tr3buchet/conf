@@ -38,6 +38,8 @@ shopt -s histappend
 
 # ------------------- virtualenv settings ------------------------------ #
 if [ -f ~/.local/bin/virtualenvwrapper.sh ]; then
+VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export VIRTUALENVWRAPPER_PYTHON
     source ~/.local/bin/virtualenvwrapper.sh
 fi
 # ------------------- end virtualenv settings -------------------------- #
