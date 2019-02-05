@@ -1,0 +1,38 @@
+[include]
+    path = .gitconfig.user
+
+[pull]
+    ff = only
+
+[merge]
+    tool = vimdiff
+    conflictstyle = diff3
+    prompt = false
+
+[rebase]
+    autosquash = true
+
+[diff]
+    tool = vimdiff
+
+[core]
+    pager = less -+X
+
+[alias]
+    b = branch
+    bm = ! git fetch --all --quiet && ~/bin/git_branch_merged
+    comaa = commit -a --amend
+    coma = commit -a
+    comaf = commit -a --fixup
+    c  = checkout
+    cb = checkout -b
+    d  = branch -D
+    fa = ! git fetch --all && echo "====branches====" && ~/bin/git_branch_merged
+    p  = pull
+    tlog = log --oneline origin/master..HEAD --no-decorate
+
+[grep]
+    exclude = locale
+
+[log]
+    decorate = auto

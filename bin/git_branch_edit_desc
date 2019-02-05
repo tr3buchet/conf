@@ -1,6 +1,0 @@
-#!/bin/bash
-
-branch=`git branch 2>/dev/null | sed -n '/^\*/s/^\* //p'`
-if [[ ${branch} != *"HEAD"* ]]; then
-    /usr/bin/git branch --edit-description $branch
-fi
