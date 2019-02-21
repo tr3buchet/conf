@@ -22,5 +22,5 @@ let python_highlight_all = 1
 let w:redbg2=matchadd("RedBG", '\%>79v.\+')
 
 " remove NOTE from the todo hilighing
-syn clear pythonTodo
-syn keyword pythonTodo XXX TODO FIXME contained
+"syn clear pythonTodo
+"syn keyword pythonTodo XXX TODO FIXME contained

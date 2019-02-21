@@ -1,3 +1,18 @@
+source $VIMRUNTIME/vimrc_example.vim
+
+" centralized directory for backup files
+set writebackup   " create a backup while writing
+set nobackup      " delete the backup after writing
+set backupdir=~/.vim/temp/backup//
+
+" centralized directory for swap files
+set swapfile
+set directory=~/.vim/temp/swap//
+
+" centralized directory for undo files
+set undofile
+set undodir=~/.vim/temp/undo//
+
 set nowrap          " do not wrap text
 set number          " display line number
 
@@ -11,6 +26,7 @@ set shiftwidth=4    " number of spaces to insert with reindent operations (<< an
 set showmatch       " highlights all matches when searching
 set hlsearch        " sets highlighting of all search terms
 set incsearch       " vim starts searching immediately and updates as you type
+colo peachpuff      " peachpuff color theme
 
 "set nofoldenable       " disables folds/folding
 "set foldminlines=99999 " disables the folding even in vimdiff
@@ -29,7 +45,7 @@ set fillchars=fold:\
 
 
 set nocompatible
-"set mouse=a
+set mouse=""
 
 " some leader+key maps (leader defaults to '\')
 set pastetoggle=<leader>p
@@ -59,26 +75,16 @@ endif
 set visualbell      " no more beeps!
 set showcmd
 
-" centralized backup directory for swp files
-set backupdir=~/.vim/tmp
-set directory=~/.vim/tmp
-
 " copy/paste between sessions
-vmap <silent> <F5> y:call writefile(split(@0, "\n"), $HOME . "/.vim/copy_tmp")<cr>
-nmap <silent> <F5> yy:call writefile(split(@0, "\n"), $HOME . "/.vim/copy_tmp")<cr>
-nmap <F6> :r ~/.vim/copy_tmp<CR>
+vmap <silent> <F5> y:call writefile(split(@0, "\n"), $HOME . "/.vim/temp/copy_temp")<cr>
+nmap <silent> <F5> yy:call writefile(split(@0, "\n"), $HOME . "/.vim/temp/copy_temp")<cr>
+nmap <F6> :r ~/.vim/temp/copy_temp<CR>
 
 set title titlestring=%{v:progname}\ %F
 "set title titlestring=[%{$PWD}]%%\ %{v:progname}\ %F
 
 " 0 switches to next window
 nnoremap 0 <C-w><C-w>
-
-" remember cursor location in file
-if has("autocmd")
-  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal! g`\"zz" | endif
-endif
 
 " space centers current line
 nmap <space> zz
@@ -106,6 +112,7 @@ if filereadable(glob("~/.vim/bundle/Vundle.vim/autoload/vundle.vim"))
     " plugins
     Plugin 'tr3buchet/vimgitgrep'
     Plugin 'vim-syntastic/syntastic'
+    Plugin 'fatih/vim-go'
     "Plugin 'yhat/vim-docstring'
     "Plugin 'tmhedberg/SimpylFold'
     "Plugin 'scrooloose/syntastic'
