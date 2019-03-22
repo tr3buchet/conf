@@ -17,6 +17,7 @@
 
 [core]
     pager = less -+X
+    editor = vim
 
 [alias]
     b = branch
