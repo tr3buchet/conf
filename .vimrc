@@ -133,11 +133,49 @@ if filereadable(glob("~/.vim/bundle/Vundle.vim/autoload/vundle.vim"))
     " ------- end vundle --------------------------------------
 
     " ------- vimgitgrep --------------------------------------
+    "
+    fun Bothprev ()
+        lprev
+        cprev
+    endfun
+    fun Bothnext ()
+        lnext
+        cnext
+    endfun
+    " from https://github.com/vim-syntastic/syntastic/issues/32#issuecomment-249412359
+    " Allow :lprev to work with empty location list, or at first location
+    function LocationPrevious()
+      try
+        lprev
+      catch /:E553:/
+        lfirst
+      catch /:E42:/
+        echo "Location list empty"
+      catch /.*/
+        echo v:exception
+      endtry
+    endfunction
+
+    " Allow :lnext to work with empty location list, or at last location
+    function LocationNext()
+      try
+        lnext
+      catch /:E553:/
+        lfirst
+      catch /:E42:/
+        echo "Location list empty"
+      catch /.*/
+        echo v:exception
+      endtry
+    endfunction
     nmap <silent> <F2> :call Gr3p()<cr>
     nmap <silent> <F3> :call GitGr3p(0)<cr>
     nmap <silent> <F4> :call ToggleLList()<cr>
-    nmap <silent> <A-Up> :call Previousresult()<cr>
-    nmap <silent> <A-Down> :call Nextresult()<cr>
+    " these two are from vimgitgr3p, may need to worry about buffers in the above functions
+    "nmap <silent> <A-Up> :silent! call Previousresult()<cr>
+    "nmap <silent> <A-Down> :silent! call Nextresult()<cr>
+    nmap <silent> <A-Up> :silent! call LocationPrevious()<cr>
+    nmap <silent> <A-Down> :silent! call LocationNext()<cr>
     nmap <silent> <A-Left> :call GoBackSearch()<cr>
     nmap <silent> <A-Right> :call GitGr3p(1)<cr>
     let g:gitgreppathexcludes = '^doc/\|\/doc/\|^locale/\|/locale/\|.sample$'
@@ -146,19 +184,23 @@ if filereadable(glob("~/.vim/bundle/Vundle.vim/autoload/vundle.vim"))
     " ------- syntastic settings ------------------------------
     " config flake8 setup in the syntastic plugin
     " leader e populates location list with errors
-    nnoremap <silent> <leader>e :SyntasticCheck<cr>:SyntasticSetLoclist<cr>
+    "autocmd FileType python nnoremap <silent> <leader>e :SyntasticCheck<cr>:SyntasticSetLoclist<cr>
     let g:syntastic_mode_map = {'mode':'passive'}
     let g:syntastic_python_checkers = ['flake8']
     let g:syntastic_python_flake8_args='--builtin=_'
-    let g:syntastic_check_on_open = 0                  " run syntastic check on file open
+    let g:syntastic_check_on_open = 1                  " run syntastic check on file open
     let g:syntastic_check_on_wq = 0                    " disable checking on write quit
-    let g:syntastic_check_on_write = 0                 " disable checking on write
+    let g:syntastic_check_on_write = 1                 " disable checking on write
     let g:syntastic_aggregate_errors = 1               " run all checkers and aggregate results
-    let g:syntastic_always_populate_loc_list = 0       " put errors into the location list
-    let g:syntastic_auto_loc_list = 0                  " don't open or close the loc list
+    let g:syntastic_always_populate_loc_list = 1       " auto put errors into the location list
+    let g:syntastic_auto_loc_list = 2                  " don't open the loc list, close only
     let g:syntastic_stl_format = '[err: %e][warn: %w]' " yep
     let g:syntastic_enable_highlighting = 0            " highlight the errors is off
     let g:syntastic_enable_signs = 0                   " disable the white bar on the left showing errors
+    let g:syntastic_mode_map = {
+        \ "mode": "passive",
+        \ "active_filetypes": ["python"],
+        \ "passive_filetypes": [] }
     " ------- end syntastic settings --------------------------
     " ------- simpylfold settings -----------------------------
     let g:SimpylFold_docstring_preview = 1
@@ -167,6 +209,29 @@ if filereadable(glob("~/.vim/bundle/Vundle.vim/autoload/vundle.vim"))
     let g:SimpylFold_fold_import = 0
     let b:SimpylFold_fold_import = 0
     " ------- end simpylfold settings -------------------------
+    " ------- golang settings ---------------------------------
+    " keybinds
+    autocmd FileType go nnoremap <silent> <leader>e :GoVet<cr>
+    autocmd FileType go nmap <leader>n O// NOTE(trey): 
+
+    " config https://github.com/fatih/vim-go/blob/master/doc/vim-go.txt
+    " may need to figure out how to make golang use locationlist:
+    " https://vi.stackexchange.com/questions/14166/quickfix-window-and-location-list-open-at-the-same-time-causes-weird-resize?rq=1
+    let g:go_fmt_command = "goimports"
+
+    " i am not using the metalinter, too many golint errors
+    "let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+
+    "let g:go_fmt_fail_silently = 0
+
+    " highlight options
+    let g:go_highlight_types = 1
+    let g:go_highlight_fields = 0
+    let g:go_highlight_functions = 1
+    let g:go_highlight_function_calls = 1
+    let g:go_highlight_operators = 1
+    let g:go_highlight_extra_types = 1
+    " ------- end golang settings -----------------------------
 endif
 " ------- end vundle ----------------------------------------------------------------------------------------------
 

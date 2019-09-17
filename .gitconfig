@@ -21,15 +21,15 @@
 
 [alias]
     b = branch
+    bd  = branch -D
     bm = ! git fetch --all --quiet && ~/bin/git_branch_merged
     comaa = commit -a --amend
     coma = commit -a
     comaf = commit -a --fixup
     c  = checkout
     cb = checkout -b
-    d  = branch -D
-    fa = ! git fetch --all && echo "====branches====" && ~/bin/git_branch_merged
-    p  = pull
+    fa = ! git fetch --all && echo "======local branch summary======" && ~/bin/git_branch_merged
+    cleanup = clean -dxi
     tlog = log --oneline origin/master..HEAD --no-decorate
 
 [grep]
