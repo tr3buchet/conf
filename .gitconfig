@@ -5,7 +5,8 @@
     ff = only
 
 [merge]
-    tool = vimdiff
+    tool = meld
+    #tool = vimdiff
     conflictstyle = diff3
     prompt = false
 
@@ -13,7 +14,11 @@
     autosquash = true
 
 [diff]
-    tool = vimdiff
+    tool = meld
+    #tool = vimdiff
+
+[difftool]
+  prompt = false
 
 [core]
     pager = less -+X
@@ -31,6 +36,7 @@
     fa = ! git fetch --all && echo "======local branch summary======" && ~/bin/git_branch_merged
     cleanup = clean -dxi
     tlog = log --oneline origin/master..HEAD --no-decorate
+    subshas = ! git ls-tree -r HEAD | grep commit
 
 [grep]
     exclude = locale
