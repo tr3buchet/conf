@@ -38,7 +38,7 @@ colo peachpuff      " peachpuff color theme
 " those docstrings are folded. without those defined (without
 " that file) like everything is folded somehow...
 " https://chrisdown.name/2015/02/26/folding-python-docstrings-in-vim.html
-autocmd FileType python setlocal foldenable foldmethod=syntax
+"autocmd FileType python setlocal foldenable foldmethod=syntax
 set foldtext=getline(v:foldstart) " set the folded docstring to the first line
 " don't fill the fold line of text with dashes
 set fillchars=fold:\ 
@@ -184,11 +184,11 @@ if filereadable(glob("~/.vim/bundle/Vundle.vim/autoload/vundle.vim"))
     " ------- syntastic settings ------------------------------
     " config flake8 setup in the syntastic plugin
     " leader e populates location list with errors
-    "autocmd FileType python nnoremap <silent> <leader>e :SyntasticCheck<cr>:SyntasticSetLoclist<cr>
+    autocmd FileType python nnoremap <silent> <leader>e :SyntasticCheck<cr>:SyntasticSetLoclist<cr>
     let g:syntastic_mode_map = {'mode':'passive'}
     let g:syntastic_python_checkers = ['flake8']
     let g:syntastic_python_flake8_args='--builtin=_'
-    let g:syntastic_check_on_open = 1                  " run syntastic check on file open
+    let g:syntastic_check_on_open = 0                  " run syntastic check on file open
     let g:syntastic_check_on_wq = 0                    " disable checking on write quit
     let g:syntastic_check_on_write = 1                 " disable checking on write
     let g:syntastic_aggregate_errors = 1               " run all checkers and aggregate results
