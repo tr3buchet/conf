@@ -1,0 +1,28 @@
+#!/bin/bash
+# lock and unlock the osx dock
+# new apps will show up at the bottom of the dock, but items cannot be rearranged or "keep in dock"ed
+# without unlocking the dock first
+
+case $1 in
+  unlock)
+    echo "unlocking dock"
+    defaults write com.apple.dock contents-immutable -bool false
+    killall Dock
+    ;;
+  lock)
+    echo "locking dock"
+    defaults write com.apple.dock contents-immutable -bool true
+    killall Dock
+    ;;
+  status)
+    echo -n "dock status: "
+    case "$(defaults read com.apple.dock contents-immutable)" in
+      0) echo "unlocked" ;;
+      1) echo "locked" ;;
+      *) echo "unlocked" ;; # before ever running, the contents-immutable field is unset
+    esac
+    ;;
+  *)
+    echo "manage mutability of the osx dock"
+    echo "usage: lockdock {lock,unlock,status}"
+esac

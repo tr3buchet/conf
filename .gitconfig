@@ -20,6 +20,9 @@
 [difftool]
   prompt = false
 
+[clone]
+  recurse-submodules = true
+
 [core]
     pager = less -+X
     editor = vim
@@ -28,18 +31,22 @@
     b = branch
     bd  = branch -D
     bm = ! git fetch --all --quiet && ~/bin/git_branch_merged
+    po = push origin
     comaa = commit -a --amend
     coma = commit -a
     comaf = commit -a --fixup
     c  = checkout
     cb = checkout -b
-    fa = ! git fetch --all && echo "======local branch summary======" && ~/bin/git_branch_merged
+    fa = ! git fetch --all --tags --recurse-submodules && echo "======local branch summary======" && ~/bin/git_branch_merged
     cleanup = clean -dxi
     tlog = log --oneline origin/master..HEAD --no-decorate
-    subshas = ! git ls-tree -r HEAD | grep commit
+    supdate = submodule update --init --recursive
 
 [grep]
     exclude = locale
 
 [log]
     decorate = auto
+
+[advice]
+	detachedHead = false

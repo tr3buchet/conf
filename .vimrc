@@ -47,6 +47,23 @@ set fillchars=fold:\
 set nocompatible
 set mouse=""
 
+
+" wrap things in visual mode
+function! QuickWrap(wrapper)
+  let l:w = a:wrapper
+  let l:inside_or_around = (&selection == 'exclusive') ? ('i') : ('a')
+  normal `>
+  execute "normal " . inside_or_around . escape(w, '\')
+  normal `<
+  execute "normal i" . escape(w, '\')
+  normal `<
+endfunction
+
+vnoremap ' <esc>:call QuickWrap("'")<cr>
+vnoremap " <esc>:call QuickWrap('"')<cr>
+
+
+
 " some leader+key maps (leader defaults to '\')
 set pastetoggle=<leader>p
 imap <leader><leader> <esc>
@@ -113,6 +130,7 @@ if filereadable(glob("~/.vim/bundle/Vundle.vim/autoload/vundle.vim"))
     Plugin 'tr3buchet/vimgitgrep'
     Plugin 'vim-syntastic/syntastic'
     Plugin 'fatih/vim-go'
+    "Plugin 'tpope/vim-surround'
     "Plugin 'yhat/vim-docstring'
     "Plugin 'tmhedberg/SimpylFold'
     "Plugin 'scrooloose/syntastic'

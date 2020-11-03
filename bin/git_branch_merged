@@ -4,7 +4,7 @@ import sys
 
 
 def git(*args):
-    return subprocess.check_output(['/usr/bin/git'] + list(args)).strip()
+    return subprocess.check_output(['/usr/local/bin/git'] + list(args)).strip()
 
 
 def strike(text):
