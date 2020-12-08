@@ -4,6 +4,12 @@
 [pull]
     ff = only
 
+[push]
+    # must specify what to push
+    # unless remote.*.push specifies otherwise
+    # # which is usually doesn't
+    default = nothing
+
 [merge]
     tool = meld
     #tool = vimdiff
